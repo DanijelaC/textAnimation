@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Animation</title>
+<style>
+  #div1, #div2{
+      width:400px;
+	  height:200px;
+	  border:1px solid black;
+	  margin-bottom: 5px;
+  }
+</style>
+<script>
+
+  window.addEventListener("load",start);
+  
+  function start(){
+    
+	btn = document.forms[0].btn;
+	div1 = document.getElementById("div1");
+	div2 = document.getElementById("div2");
+	btn.addEventListener("click", textAnim);
+	s = document.forms[0].str;
+  }
+  
+  var count = 0;
+  
+  function textAnim(){
+     
+     if(s.value == ""){
+	    alert("Moraste uneti tekst.");
+		return false;
+	 }
+     btn.disabled = true;
+     str = s.value;
+	 div1.innerHTML = "";
+     t = setInterval("printText()", 100);
+  }
+  
+  function printText(){
+     if(count < str.length){
+	     div1.innerHTML += str[count];
+	     count++;
+	 }else{
+	      clearInterval(t); 
+		  count = 0;
+		  div2.innerHTML += div1.innerHTML + "<hr/>";
+		  s.value = "";
+		  btn.disabled = false;
+	 }
+     
+  }
+  
+</script>
+</head>
+<body>
+<form>
+	<input type="text" name="str"/>
+	<input type="button" value="Send" name="btn"/>
+</form>
+
+<div id="div1">
+</div>
+
+<div id="div2">
+</div>
+
+</body>
+</html>
